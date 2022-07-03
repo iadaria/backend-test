@@ -33,7 +33,8 @@ import { IncomesModule } from 'src/incomes/incomes.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      synchronize: process.env.NODE_ENV !== 'prod',
+      //synchronize: process.env.NODE_ENV !== 'prod',
+      synchronize: false,
       logging: process.env.NODE_ENV === 'dev',
       entities: [Account, Income],
     }),
@@ -41,6 +42,7 @@ import { IncomesModule } from 'src/incomes/incomes.module';
       installSubscriptionHandlers: true,
       driver: ApolloDriver,
       autoSchemaFile: true,
+      
     }),
     AccountsModule,
     IncomesModule,

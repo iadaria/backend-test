@@ -14,3 +14,33 @@ Get query
     }
   }
 }
+
+3 Получаем баланс account.ts для v2/me/wallets & accountUtils.ts -> getBalanceByUserAndFunds
+
+export const getBalanceByUserAndFunds = async (userId, funds) => {
+  const trSum = await sequelize.query(
+    `
+    SELECT sum(amount) as sum, fund from "Incomes"
+      where account_id = :userId
+      and fund IN (:funds)
+      and type not in (${excludeTypesIncome})
+      GROUP BY fund
+    `,
+        {
+          type: Sequelize.QueryTypes.SELECT,
+          replacements: { userId, funds },
+        },
+        { useMaster: true },
+      );
+      return trSum;
+    };
+}
+
+4 {
+  getBalance(input:{ id: 146}) {
+    balance {
+      fund,
+      sum
+    }
+  }
+}

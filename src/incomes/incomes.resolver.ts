@@ -1,3 +1,4 @@
+import { GetBalanceOutput, GetBalanceInput } from './dtos/get-balance.dto';
 import { GetIncomeInput, GetIncomeOutput } from './dtos/get-income.dto';
 import { IncomesService } from './incomes.service';
 import { Income } from './entities/income.entity';
@@ -11,5 +12,10 @@ export class IncomesResolver {
     @Query(returns => GetIncomeOutput)
     async getIncome(@Args('input') getIncomeInput: GetIncomeInput): Promise<GetIncomeOutput> {
         return this.incomeService.findOneById(getIncomeInput);
+    }
+
+    @Query(returns => GetBalanceOutput)
+    async getBalance(@Args('input') getBalanceInput: GetBalanceInput): Promise<GetBalanceOutput> {
+        return this.incomeService.getBalanceByUser(getBalanceInput);
     }
 }

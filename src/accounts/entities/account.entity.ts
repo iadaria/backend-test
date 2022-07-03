@@ -6,7 +6,7 @@ import { IsBoolean, IsEmail, IsString } from 'class-validator';
 
 @InputType('AccountInputType', { isAbstract: true })
 @ObjectType()
-//@Entity("Accounts")
+@Entity("Accounts")
 @Entity()
 export class Account extends CoreEntity {
 
