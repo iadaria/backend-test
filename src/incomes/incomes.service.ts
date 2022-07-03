@@ -27,17 +27,17 @@ export class IncomesService {
 
   async getBalanceByUser({ id }: GetBalanceInput): Promise<GetBalanceOutput> {
     try {
-      //const incomes = await this.incomes.find({ where: { account: { id }, fund: In(FUNDS), type: Not(In(TYPES)) } });
-      //const balance: number = incomes.reduce((sum, { amount }) => sum + amount, 0);
-     const balance = await this.incomes
-        .createQueryBuilder('income')
-        .select(['fund','SUM(amount)'])
-        .where("account_id = :id", { id })
-        .andWhere("fund IN (:...funds)", { funds: FUNDS })
-        .andWhere("type not in (:...types)", { types: TYPES })
-        .groupBy('fund')
-        .getRawMany();
-
+      const funds = FUNDS;
+      const types = TYPES;
+      const balance = await this.incomes
+      .createQueryBuilder()
+      .select(['fund','SUM(amount)'])
+      .where("account_id = :id", { id })
+      .andWhere("fund IN (:...funds)", { funds })
+      .andWhere("type not in (:...types)", { types})
+      .groupBy('fund')
+      .getRawMany();
+      
       if (!balance) {
         return { ok: false, error: 'User not found' };
       }
@@ -47,3 +47,6 @@ export class IncomesService {
     }
   }
 }
+
+//const incomes = await this.incomes.find({ where: { account: { id }, fund: In(FUNDS), type: Not(In(TYPES)) } });
+//const balance: number = incomes.reduce((sum, { amount }) => sum + amount, 0);
