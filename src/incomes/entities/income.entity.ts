@@ -1,15 +1,22 @@
+import { Account } from 'src/accounts/entities/account.entity';
 import { Field, Float, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { CoreEntity } from './../../common/entities/core.entity';
-import { Column, Entity } from "typeorm";
+import { CoreEntity } from 'src/common/entities/core.entity';
+import { Column, Entity, ManyToOne } from "typeorm";
 import { IsBoolean, IsNumber, IsString } from 'class-validator';
 
 @InputType('IncomeInputType', { isAbstract: true })
 @ObjectType()
 @Entity("Incomes")
-export class Incomes extends CoreEntity {
+//@Entity()
+export class Income extends CoreEntity {
 
-    @Column("integer", { name: "account_id", nullable: true })
-    accountId: number | null;
+    @Field((type) => Account, { nullable: true })
+    @ManyToOne((type) => Account, (account) => account.incomes, {
+        onDelete: 'SET NULL',
+        nullable: true,
+        eager: true,
+    })
+    account?: Account;
 
     @Column({ nullable: true })
     @Field((type) => String)

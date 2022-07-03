@@ -1,12 +1,14 @@
+import { Income } from './../../incomes/entities/income.entity';
 import { CoreEntity } from './../../common/entities/core.entity';
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, Entity} from "typeorm";
+import { Column, Entity, OneToMany} from "typeorm";
 import { IsBoolean, IsEmail, IsString } from 'class-validator';
 
 @InputType('AccountInputType', { isAbstract: true })
 @ObjectType()
 @Entity("Accounts")
-export class Accounts extends CoreEntity {
+//@Entity()
+export class Account extends CoreEntity {
 
     @Column()
     @Field((type) => String)
@@ -31,4 +33,8 @@ export class Accounts extends CoreEntity {
     @Column()
     @Field((type) => String)
     phone: string | null;
+
+    @Field((type) => [Income]) //graphql syntax
+    @OneToMany((type) => Income, (income) => income.account)
+    incomes: Income[];
 }

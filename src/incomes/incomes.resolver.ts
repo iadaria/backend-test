@@ -1,4 +1,15 @@
-import { Resolver } from '@nestjs/graphql';
+import { GetIncomeInput, GetIncomeOutput } from './dtos/get-income.dto';
+import { IncomesService } from './incomes.service';
+import { Income } from './entities/income.entity';
+import { Args, Query, Resolver, Int } from '@nestjs/graphql';
 
-@Resolver()
-export class IncomesResolver {}
+
+@Resolver((of) => Income)
+export class IncomesResolver {
+    constructor(private readonly incomeService: IncomesService) {}
+
+    @Query(returns => GetIncomeOutput)
+    async getIncome(@Args('input') getIncomeInput: GetIncomeInput): Promise<GetIncomeOutput> {
+        return this.incomeService.findOneById(getIncomeInput);
+    }
+}
