@@ -6,8 +6,8 @@ import { IsBoolean, IsNumber, IsString } from 'class-validator';
 
 @InputType('IncomeInputType', { isAbstract: true })
 @ObjectType()
-@Entity("Incomes")
-//@Entity()
+//@Entity("Incomes")
+@Entity()
 export class Income extends CoreEntity {
 
     @Field((type) => Account, { nullable: true })

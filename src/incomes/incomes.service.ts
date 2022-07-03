@@ -13,7 +13,7 @@ export class IncomesService {
 
     async findOneById({ id }: GetIncomeInput): Promise<GetIncomeOutput> {
         try {
-            const income = await this.incomes.findOne(id);/*  { relations: ['account'] } */
+            const income = await this.incomes.findOneBy({ id })
             if (!income) {
               return { ok: false, error: 'Income not found' };
             }

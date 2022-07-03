@@ -1,3 +1,5 @@
+import { Income } from './incomes/entities/income.entity';
+import { Account } from 'src/accounts/entities/account.entity';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
@@ -7,7 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AccountsModule } from './accounts/accounts.module';
-import { IncomesModule } from './incomes/incomes.module';
+import { IncomesModule } from 'src/incomes/incomes.module';
 
 @Module({
   imports: [
@@ -33,7 +35,7 @@ import { IncomesModule } from './incomes/incomes.module';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: process.env.NODE_ENV === 'dev',
-      //entities: [User, Verification],
+      entities: [Account, Income],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       installSubscriptionHandlers: true,
