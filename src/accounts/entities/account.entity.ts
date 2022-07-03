@@ -23,7 +23,7 @@ export class Accounts extends CoreEntity {
     @IsString()
     password: string | null;
 
-    @Column({ name: "email_is_verified", default: () => "false", })
+    @Column({ default: () => "false", })
     @Field((type) => Boolean)
     @IsBoolean()
     emailIsVerified: boolean;

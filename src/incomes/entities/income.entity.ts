@@ -26,32 +26,32 @@ export class Incomes extends CoreEntity {
     @IsNumber()
     amount: number;
 
-    @Column({ name: "is_old", nullable: true, default: () => "false" })
+    @Column({nullable: true, default: () => "false" })
     @Field((type) => Boolean)
     @IsBoolean()
     isOld: boolean | null;
 
-    @Column({ name: "stable_score_id", nullable: true })
+    @Column({ nullable: true })
     @Field((type) => Int)
     @IsNumber()
     stableScoreId: number | null;
 
-    @Column({ name: "group_id", nullable: true })
+    @Column({  nullable: true })
     @Field((type) => Int)
     @IsNumber()
     groupId: number | null;
 
-    @Column({ name: "is_new_stable_score", default: () => "false" })
+    @Column({  default: () => "false" })
     @Field((type) => Boolean)
     @IsBoolean()
     isNewStableScore: boolean;
 
-    @Column({ name: "new_stable_score_id", nullable: true })
+    @Column({ nullable: true })
     @Field((type) => Int)
     @IsNumber()
     newStableScoreId: number | null;
 
-    @Column({ name: "pay_id", nullable: true })
+    @Column({  nullable: true })
     @Field((type) => String)
     @IsString()
     payId: string | null;
